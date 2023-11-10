@@ -14,7 +14,7 @@ public class ReportCommandController {
     public String createReport(@RequestBody CreateReportRestModel model) {
         MessageProperties messageProperties = new MessageProperties();
         messageProperties.setContentType("application/json");
-        rabbitTemplate.convertAndSend("Direct", "addComment", model);
+        rabbitTemplate.convertAndSend("CommentExchange", "addComment", model);
         return "Create Report";
     }
 

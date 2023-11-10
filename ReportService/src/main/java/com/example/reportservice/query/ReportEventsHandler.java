@@ -20,8 +20,8 @@ public class ReportEventsHandler {
     @EventHandler
     public void on(ReportCreateEvent event) {
         System.out.println("Adding Report in mongoDB");
-        ReportEntity bookEntity = new ReportEntity();
-        BeanUtils.copyProperties(event, bookEntity);
-        reportRepository.insert(bookEntity);
+        ReportEntity reportEntity = new ReportEntity();
+        BeanUtils.copyProperties(event, reportEntity);
+        reportRepository.insert(reportEntity);
     }
 }

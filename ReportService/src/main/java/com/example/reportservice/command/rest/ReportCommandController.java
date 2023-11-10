@@ -10,7 +10,7 @@ public class ReportCommandController {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
-    @PostMapping(value = "/createReport")
+    @GetMapping(value = "/createReport")
     public String createReport(@RequestBody CreateReportRestModel model) {
         MessageProperties messageProperties = new MessageProperties();
         messageProperties.setContentType("application/json");

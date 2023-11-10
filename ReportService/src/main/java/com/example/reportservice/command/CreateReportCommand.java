@@ -1,18 +1,15 @@
 package com.example.reportservice.command;
-import com.example.reportservice.command.rest.CreateReportRestmodel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 
-@AllArgsConstructor
-@Getter
+import lombok.Builder;
+import lombok.Data;
+import org.axonframework.modelling.command.AggregateIdentifier;
+
+@Builder
+@Data
 public class CreateReportCommand {
-    private final CreateReportRestmodel createReportRestModel;
-
-//    public ReportAggregate toReportAggregate() {
-//        // Convert CreateReportRestModel to ReportAggregate
-//        // Implement conversion logic here
-////        return new ReportAggregate(
-////                // Populate fields based on createReportRestModel
-////        );
-//    }
+    @AggregateIdentifier
+    private final String reportId;
+    private final String name;
+    private final String post;
+    private final String comment;
 }

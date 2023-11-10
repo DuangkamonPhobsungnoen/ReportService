@@ -1,20 +1,21 @@
 package com.example.reportservice.command.rest;
-
-import com.example.reportservice.command.ReportCommandService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.amqp.core.MessageProperties;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class ReportCommandController {
-    private final ReportCommandService reportCommandService;
 
-    public ReportCommandController(ReportCommandService reportCommandService) {
-        this.reportCommandService = reportCommandService;
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+
+    @PostMapping(value = "/createReport")
+    public String createReport(@RequestBody CreateReportRestModel model) {
+        MessageProperties messageProperties = new MessageProperties();
+        messageProperties.setContentType("application/json");
+        rabbitTemplate.convertAndSend("Direct", "addComment", model);
+        return "Create Report";
     }
 
-    @PostMapping("/reports")
-    public void createReport(@RequestBody CreateReportRestmodel createReportRestModel) {
-        reportCommandService.createReport(new CreateReportRestmodel(createReportRestModel));
-    }
 }

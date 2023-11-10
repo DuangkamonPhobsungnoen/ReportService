@@ -1,21 +1,39 @@
 package com.example.reportservice.command;
 
-import com.example.reportservice.core.event.ReportCreateEvent;
-import org.springframework.context.ApplicationEventPublisher;
+import com.example.reportservice.command.rest.CreateReportRestModel;
+import org.axonframework.commandhandling.gateway.CommandGateway;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 @Service
 public class ReportCommandService {
-    private final ApplicationEventPublisher eventPublisher;
+    @Autowired
+    private final CommandGateway commandGateway;
 
-    public ReportCommandService(ApplicationEventPublisher eventPublisher) {
-        this.eventPublisher = eventPublisher;
+    @Autowired
+    public ReportCommandService(CommandGateway commandGateway) {
+        this.commandGateway = commandGateway;
     }
 
-    public void createReport(CreateReportCommand createReportCommand) {
-        // Perform validation or business logic if needed
+    @RabbitListener(queues = "AddCommentQueue")
+    public void createReport(CreateReportRestModel model) {
+        System.out.println("CREATE REPORT");
+        CreateReportCommand command = CreateReportCommand.builder()
+                .reportId(UUID.randomUUID().toString())
+                .name(model.getName())
+                .comment(model.getComment())
+                .post(model.getPost())
+                .build();
 
-        // Publish the event
-        eventPublisher.publishEvent(new ReportCreateEvent(createReportCommand.toReportAggregate()));
+        System.out.println(command);
+
+        try {
+            commandGateway.sendAndWait(command);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

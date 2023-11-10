@@ -1,9 +1,9 @@
-package com.example.reportservice.query.rest;
+package com.example.reportservice.core.events;
 
 import lombok.Data;
 
 @Data
-public class ReportRestModel {
+public class ReportCreateEvent {
     private String reportId;
     private String name;
     private String post;

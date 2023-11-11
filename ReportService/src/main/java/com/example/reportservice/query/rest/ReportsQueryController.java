@@ -19,10 +19,10 @@ public class ReportsQueryController {
     }
 
     @GetMapping()
-    public List<ReportRestModel> getBooks() {
-        FindReportsQuery findBooksQuery = new FindReportsQuery();
+    public List<ReportRestModel> getReport() {
+        FindReportsQuery findReportsQuery = new FindReportsQuery();
         return queryGateway.query(
-                findBooksQuery,
+                findReportsQuery,
                 ResponseTypes.multipleInstancesOf(ReportRestModel.class)
         ).join();
     }

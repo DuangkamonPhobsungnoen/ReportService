@@ -9,7 +9,7 @@ import org.axonframework.modelling.command.AggregateIdentifier;
 public class CreateReportCommand {
     @AggregateIdentifier
     private final String reportId;
-    private final String name;
-    private final String post;
-    private final String comment;
+    private final String type;
+    private final String reportTargetId;
+
 }

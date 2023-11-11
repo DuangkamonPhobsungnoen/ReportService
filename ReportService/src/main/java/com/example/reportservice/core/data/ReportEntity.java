@@ -11,16 +11,14 @@ import java.io.Serializable;
 public class ReportEntity implements Serializable {
     @Id
     private String reportId;
-    private String name;
-    private String post;
-    private String comment;
+    private String type;
+    private String reportTargetId;
 
     public ReportEntity() {}
 
-    public ReportEntity(String reportId, String name, String post, String comment) {
+    public ReportEntity(String reportId, String type, String reportTargetId) {
         this.reportId = reportId;
-        this.name = name;
-        this.post = post;
-        this.comment = comment;
+        this.type = type;
+        this.reportTargetId = reportTargetId;
     }
 }

@@ -5,7 +5,6 @@ import lombok.Data;
 @Data
 public class ReportRestModel {
     private String reportId;
-    private String name;
-    private String post;
-    private String comment;
+    private String type;
+    private String reportTargetId;
 }

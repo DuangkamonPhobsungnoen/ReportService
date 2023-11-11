@@ -13,15 +13,14 @@ import org.springframework.beans.BeanUtils;
 public class ReportAggregate {
     @AggregateIdentifier
     private String reportId;
-    private String name;
-    private String post;
-    private String comment;
+    private String type;
+    private String reportTargetId;
 
     public ReportAggregate() {}
 
     @CommandHandler
     public ReportAggregate(CreateReportCommand createReportCommand) {
-        System.out.println("Report Aggregate");
+        System.out.println("ReportAggregate Report");
         ReportCreateEvent reportCreateEvent = new ReportCreateEvent();
         BeanUtils.copyProperties(createReportCommand, reportCreateEvent);
         AggregateLifecycle.apply(reportCreateEvent);
@@ -29,10 +28,9 @@ public class ReportAggregate {
 
     @EventSourcingHandler
     public void on(ReportCreateEvent reportCreateEvent) {
-        System.out.println("ON AGGREGATE");
+        System.out.println("EventSourcingHandler Report");
         this.reportId = reportCreateEvent.getReportId();
-        this.name = reportCreateEvent.getName();
-        this.comment = reportCreateEvent.getComment();
-        this.post = reportCreateEvent.getPost();
+        this.type = reportCreateEvent.getType();
+        this.reportTargetId = reportCreateEvent.getReportTargetId();
     }
 }

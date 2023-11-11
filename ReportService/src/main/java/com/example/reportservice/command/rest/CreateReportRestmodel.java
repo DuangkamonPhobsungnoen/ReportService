@@ -6,15 +6,13 @@ import java.io.Serializable;
 
 @Data
 public class CreateReportRestModel implements Serializable {
-    private String name;
-    private String post;
-    private String comment;
+    private String type;
+    private String reportTargetId;
 
     public CreateReportRestModel() {}
 
-    public CreateReportRestModel(String name, String post, String comment) {
-        this.name = name;
-        this.post = post;
-        this.comment = comment;
+    public CreateReportRestModel(String type, String reportTargetId) {
+        this.type = type;
+        this.reportTargetId = reportTargetId;
     }
 }

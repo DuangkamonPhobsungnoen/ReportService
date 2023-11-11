@@ -1,4 +1,5 @@
 package com.example.reportservice.command.rest;
+import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +11,17 @@ public class ReportCommandController {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
-    @GetMapping(value = "/createReport")
-    public String createReport(@RequestBody CreateReportRestModel model) {
+    @PostMapping (value = "/report/{type}/{reportTargetId}")
+    public String createReport(@PathVariable("type") String type, @PathVariable("reportTargetId") String reportTargetId) {
+        CreateReportRestModel model = new CreateReportRestModel();
+        model.setType(type);
+        model.setReportTargetId(reportTargetId);
         MessageProperties messageProperties = new MessageProperties();
         messageProperties.setContentType("application/json");
-        rabbitTemplate.convertAndSend("CommentExchange", "addComment", model);
-        return "Create Report";
+        Message message = rabbitTemplate.getMessageConverter().toMessage(model, messageProperties);
+//        rabbitTemplate.convertAndSend("CommentExchange", "addComment", message);
+        rabbitTemplate.convertAndSend("ReportExchange", "addReport", message);
+        return "Report";
     }
 
 }

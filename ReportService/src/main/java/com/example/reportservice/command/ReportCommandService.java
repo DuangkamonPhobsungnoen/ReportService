@@ -20,12 +20,11 @@ public class ReportCommandService {
 
     @RabbitListener(queues = "AddCommentQueue")
     public void createReport(CreateReportRestModel model) {
-        System.out.println("CREATE REPORT");
+        System.out.println("ADD REPORT");
         CreateReportCommand command = CreateReportCommand.builder()
                 .reportId(UUID.randomUUID().toString())
-                .name(model.getName())
-                .comment(model.getComment())
-                .post(model.getPost())
+                .type(model.getType())
+                .reportTargetId(model.getReportTargetId())
                 .build();
 
         System.out.println(command);

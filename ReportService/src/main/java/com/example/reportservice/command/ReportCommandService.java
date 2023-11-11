@@ -18,7 +18,7 @@ public class ReportCommandService {
         this.commandGateway = commandGateway;
     }
 
-    @RabbitListener(queues = "AddCommentQueue")
+    @RabbitListener(queues = "AddReportQueue")
     public void createReport(CreateReportRestModel model) {
         System.out.println("ADD REPORT");
         CreateReportCommand command = CreateReportCommand.builder()

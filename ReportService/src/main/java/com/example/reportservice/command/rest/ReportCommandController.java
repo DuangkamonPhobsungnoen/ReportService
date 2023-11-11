@@ -19,7 +19,6 @@ public class ReportCommandController {
         MessageProperties messageProperties = new MessageProperties();
         messageProperties.setContentType("application/json");
         Message message = rabbitTemplate.getMessageConverter().toMessage(model, messageProperties);
-//        rabbitTemplate.convertAndSend("CommentExchange", "addComment", message);
         rabbitTemplate.convertAndSend("ReportExchange", "addReport", message);
         return "Report";
     }

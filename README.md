@@ -2,7 +2,7 @@
 
 ## RabbitMQ
 
-### Add ReportComment
+### Add Report
 `Queues: AddReportQueue`
 >
 `Exchanges: ReportExchange`
@@ -10,4 +10,4 @@
 `routingkey: addReport`
 
 ### Path
-`Add ReportComment (POST) : http://localhost:8082/report-service/addReportComment/{reportTargetId}`
+`AddReport (POST) : http://localhost:8082/report-service/addReport/{type}/{reportTargetId}`

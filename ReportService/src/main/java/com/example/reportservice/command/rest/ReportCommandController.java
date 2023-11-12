@@ -11,8 +11,8 @@ public class ReportCommandController {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
-    @PostMapping (value = "/report/{type}/{reportTargetId}")
-    public String createReport(@PathVariable("type") String type, @PathVariable("reportTargetId") String reportTargetId) {
+    @PostMapping (value = "/addReport/{type}/{reportTargetId}")
+    public String addReport(@PathVariable("type") String type, @PathVariable("reportTargetId") String reportTargetId) {
         CreateReportRestModel model = new CreateReportRestModel();
         model.setType(type);
         model.setReportTargetId(reportTargetId);

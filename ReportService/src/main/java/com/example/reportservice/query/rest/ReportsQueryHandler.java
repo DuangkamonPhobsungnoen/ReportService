@@ -12,21 +12,22 @@ import java.util.List;
 
 @Component
 public class ReportsQueryHandler {
-    private final ReportRepository reportRepository;
+//    private final ReportRepository reportRepository;
+//
+//    public ReportsQueryHandler(ReportRepository reportRepository) {
+//        this.reportRepository = reportRepository;
+//    }
 
-    public ReportsQueryHandler(ReportRepository reportRepository) {
-        this.reportRepository = reportRepository;
-    }
-
-    @QueryHandler
-    public List<ReportRestModel> findReports(FindReportsQuery query) {
-        List<ReportRestModel> reportRest = new ArrayList<>();
-        List<ReportEntity> storedReports = reportRepository.findAll();
-        for (ReportEntity reportEntity : storedReports) {
-            ReportRestModel reportRestModel = new ReportRestModel();
-            BeanUtils.copyProperties(reportEntity, reportRestModel);
-            reportRest.add(reportRestModel);
-        }
-        return reportRest;
-    }
+//    @QueryHandler
+//    public List<ReportRestModel> findReports(FindReportsQuery query) {
+//        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+//        List<ReportRestModel> reportRest = new ArrayList<>();
+//        List<ReportEntity> storedBooks = reportRepository.findAll();
+//        for (ReportEntity reportEntity : storedBooks) {
+//            ReportRestModel reportRestModel = new ReportRestModel();
+//            BeanUtils.copyProperties(reportEntity, reportRestModel);
+//            reportRest.add(reportRestModel);
+//        }
+//        return reportRest;
+//    }
 }

@@ -5,6 +5,8 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 @RestController
 public class ReportCommandController {
 
@@ -21,6 +23,14 @@ public class ReportCommandController {
         Message message = rabbitTemplate.getMessageConverter().toMessage(model, messageProperties);
         rabbitTemplate.convertAndSend("ReportExchange", "addReport", message);
         return "Report";
+    }
+
+    @GetMapping(value = "/getReport")
+    public ArrayList getReport() {
+        MessageProperties messageProperties = new MessageProperties();
+        messageProperties.setContentType("application/json");
+        Object Report = rabbitTemplate.convertSendAndReceive("ReportExchange", "getReport", "");
+        return (ArrayList) Report;
     }
 
 }

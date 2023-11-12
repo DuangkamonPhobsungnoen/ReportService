@@ -1,8 +1,8 @@
 # ReportService
 
-# Queue
-`AddReportQueue`
-# Exchanges
-`ReportExchange`
-# routingkey
-`addReport`
+### RabbitMQ
+
+### Add Report
+`Queues: AddReportQueue`
+`Exchanges: ReportExchange`
+`routingkey: addReport`

@@ -10,7 +10,7 @@
 `routingkey: addReport`
 
 ### Get Report
-`Queues: GetBookQueue`
+`Queues: GetReportQueue`
 >
 `Exchanges: ReportExchange`
 >
